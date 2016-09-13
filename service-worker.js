@@ -11,8 +11,8 @@ self.addEventListener('push', function (event) {
   var notificationTitle = 'Ready for collection';
   var notificationOptions = {
     body: 'Your order is ready for collection.  John is waiting for you at' + ' front counter',
-    icon: './images/icon-192x192.png',
-    badge: './images/icon-72x72.png',
+    icon: './images/logo-192x192.png',
+    badge: './images/logo-72x72.png',
     tag: 'NK-push-notification',
     requireInteraction: true,
     data: {
