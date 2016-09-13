@@ -10,9 +10,9 @@ self.addEventListener('push', function(event) {
   console.log('Received push');
   let notificationTitle = 'Ready for collection';
   const notificationOptions = {
-    body: 'Your order is ready for collection.  John is waiting for you at' +
+    body: 'Your order is ready for collection.  Neil is waiting for you at' +
       ' the front counter',
-    icon: './images/logo-192x192.png',
+    icon: './images/neil.png',
     badge: './images/logo-72x72.png',
     tag: 'NK-push-notification',
     requireInteraction: true,
