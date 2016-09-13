@@ -4,3 +4,4 @@ frontend/dist/styleguide/
 build/
 test/output/
 wires
+.publish/
