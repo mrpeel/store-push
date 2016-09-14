@@ -47,9 +47,11 @@ var Firebase = function () {
         headersPayload + '}' +
         '}' +
         '}';*/
-      var keyName = '"clients/' + dateKey + '"';
-      var payload = {};
-      payload[keyName] = {
+      var keyName = dateKey;
+      var payload = {
+        "clients": {}
+      };
+      payload['clients'][keyName] = {
         "endpoint": endpoint,
         "headers": headersList
       };
