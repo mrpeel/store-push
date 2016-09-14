@@ -1,4 +1,4 @@
-/* global PushClient, EncryptionHelperFactory, MaterialComponentsSnippets */
+/* global PushClient, EncryptionHelperFactory, MaterialComponentsSnippets, Firebase */
 /* eslint-env browser */
 
 class AppController {
@@ -24,6 +24,8 @@ class AppController {
     this._payloadTextField.oninput = () => {
       this.updatePushInfo();
     };
+
+    this._firebase = new Firebase();
 
     // Below this comment is code to initialise a material design lite
     // view.
@@ -265,6 +267,8 @@ class AppController {
           curlErrorMsgElement.textContent = curlError;
           curlErrorMsgElement.style.display = 'block';
         } else {
+          this._firebase.recordSubscription(curlCommand.replace(
+            /\\([\s\S])|(")/g, "\\$1$2"));
           curlCodeElement.textContent = curlCommand;
           curlMsgElement.style.display = 'block';
           curlErrorMsgElement.style.display = 'none';

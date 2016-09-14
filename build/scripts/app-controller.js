@@ -4,7 +4,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/* global PushClient, EncryptionHelperFactory, MaterialComponentsSnippets */
+/* global PushClient, EncryptionHelperFactory, MaterialComponentsSnippets, Firebase */
 /* eslint-env browser */
 
 var AppController = function () {
@@ -29,6 +29,8 @@ var AppController = function () {
     this._payloadTextField.oninput = function () {
       _this.updatePushInfo();
     };
+
+    this._firebase = new Firebase();
 
     // Below this comment is code to initialise a material design lite
     // view.
@@ -234,6 +236,7 @@ var AppController = function () {
           curlErrorMsgElement.textContent = curlError;
           curlErrorMsgElement.style.display = 'block';
         } else {
+          _this4._firebase.recordSubscription(curlCommand.replace(/\\([\s\S])|(")/g, "\\$1$2"));
           curlCodeElement.textContent = curlCommand;
           curlMsgElement.style.display = 'block';
           curlErrorMsgElement.style.display = 'none';
