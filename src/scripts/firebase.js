@@ -39,9 +39,11 @@ class Firebase {
       headersPayload + '}' +
       '}' +
       '}';*/
-    let keyName = '"clients/' + dateKey + '"';
-    let payload = {};
-    payload[keyName] = {
+    let keyName = dateKey;
+    let payload = {
+      "clients": {}
+    };
+    payload['clients'][keyName] = {
       "endpoint": endpoint,
       "headers": headersList
     };
