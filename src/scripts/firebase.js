@@ -19,31 +19,9 @@ class Firebase {
       return Promise.resolve();
     }
 
-    let dateKey = Date.now();
-    let headersPayload = '';
-
-    Object.keys(headersList)
-      .forEach(header => {
-        if (headersPayload !== '') {
-          headersPayload += ', ';
-        }
-        headersPayload += '"' + header + '": "' + headersList[
-          header] + '"';
-      });
-
-
-    /*let payload = '{ ' +
-      '"clients/' + dateKey + '": {' +
-      '"endpoint": "' + endpoint + '",' +
-      '"headers": {' +
-      headersPayload + '}' +
-      '}' +
-      '}';*/
-    let keyName = dateKey;
-    let payload = {
-      "clients": {}
-    };
-    payload['clients'][keyName] = {
+    //let dateKey = Date.now();
+    let payload = {};
+    payload['clients/' + Date.now()] = {
       "endpoint": endpoint,
       "headers": headersList
     };
