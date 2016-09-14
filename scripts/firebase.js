@@ -30,28 +30,9 @@ var Firebase = function () {
         return Promise.resolve();
       }
 
-      var dateKey = Date.now();
-      var headersPayload = '';
-
-      Object.keys(headersList).forEach(function (header) {
-        if (headersPayload !== '') {
-          headersPayload += ', ';
-        }
-        headersPayload += '"' + header + '": "' + headersList[header] + '"';
-      });
-
-      /*let payload = '{ ' +
-        '"clients/' + dateKey + '": {' +
-        '"endpoint": "' + endpoint + '",' +
-        '"headers": {' +
-        headersPayload + '}' +
-        '}' +
-        '}';*/
-      var keyName = dateKey;
-      var payload = {
-        "clients": {}
-      };
-      payload['clients'][keyName] = {
+      //let dateKey = Date.now();
+      var payload = {};
+      payload['clients/' + Date.now()] = {
         "endpoint": endpoint,
         "headers": headersList
       };
