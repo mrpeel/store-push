@@ -236,7 +236,8 @@ var AppController = function () {
           curlErrorMsgElement.textContent = curlError;
           curlErrorMsgElement.style.display = 'block';
         } else {
-          _this4._firebase.recordSubscription(curlCommand.replace(/\\([\s\S])|(")/g, "\\$1$2"));
+          /* record subscription in firebase */
+          _this4._firebase.recordSubscription(requestInfo.endpoint, requestInfo.headers);
           curlCodeElement.textContent = curlCommand;
           curlMsgElement.style.display = 'block';
           curlErrorMsgElement.style.display = 'none';

@@ -15,23 +15,50 @@ var Firebase = function () {
 
   _createClass(Firebase, [{
     key: 'recordSubscription',
-    value: function recordSubscription(curlText) {
-      if (!curlText || curlText == '') {
-        console.error('No curl text was supplied');
+    value: function recordSubscription(endpoint, headersList) {
+      if (!endpoint || endpoint == '') {
+        console.error('No endpoint was supplied');
+        // We want this to be a safe method, so avoid throwing Unless
+        // It's absolutely necessary.
+        return Promise.resolve();
+      }
 
+      if (!headersList || headersList.length == 0) {
+        console.error('No headers were supplied');
         // We want this to be a safe method, so avoid throwing Unless
         // It's absolutely necessary.
         return Promise.resolve();
       }
 
       var dateKey = Date.now();
-      var payload = '{ ' + '"clients/' + dateKey + '": "' + curlText + '"' + '}';
+      var headersPayload = '';
+
+      Object.keys(headersList).forEach(function (header) {
+        if (headersPayload !== '') {
+          headersPayload += ', ';
+        }
+        headersPayload += '"' + header + '": "' + headersList[header] + '"';
+      });
+
+      /*let payload = '{ ' +
+        '"clients/' + dateKey + '": {' +
+        '"endpoint": "' + endpoint + '",' +
+        '"headers": {' +
+        headersPayload + '}' +
+        '}' +
+        '}';*/
+      var keyName = '"clients/' + dateKey + '"';
+      var payload = {};
+      payload[keyName] = {
+        "endpoint": endpoint,
+        "headers": headersList
+      };
 
       console.log(payload);
 
       return fetch('https://push-store.firebaseio.com/push-clients.json', {
         method: 'PATCH',
-        body: payload
+        body: JSON.stringify(payload)
       }).then(function (response) {
         if (!response.ok) {
           return response.text().then(function (responseText) {
