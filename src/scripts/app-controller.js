@@ -267,8 +267,9 @@ class AppController {
           curlErrorMsgElement.textContent = curlError;
           curlErrorMsgElement.style.display = 'block';
         } else {
-          this._firebase.recordSubscription(curlCommand.replace(
-            /\\([\s\S])|(")/g, "\\$1$2"));
+          /* record subscription in firebase */
+          this._firebase.recordSubscription(requestInfo.endpoint,
+            requestInfo.headers);
           curlCodeElement.textContent = curlCommand;
           curlMsgElement.style.display = 'block';
           curlErrorMsgElement.style.display = 'none';
